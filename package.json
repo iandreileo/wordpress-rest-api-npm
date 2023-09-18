@@ -1,0 +1,20 @@
+{
+  "name": "wordpress-rest-api-npm",
+  "version": "1.0.0",
+  "description": "This is a npm package for the Wordpress REST API.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iandreileo/wordpress-rest-api-npm.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iandreileo/wordpress-rest-api-npm/issues"
+  },
+  "homepage": "https://github.com/iandreileo/wordpress-rest-api-npm#readme"
+}
