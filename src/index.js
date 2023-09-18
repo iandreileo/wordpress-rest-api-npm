@@ -92,6 +92,7 @@ class Wordpress {
         page: page.toString(),
         per_page: perPage.toString(),
         sticky: sticky ? "true" : "false",
+        _embed: true,
       });
 
       const response = await fetch(
@@ -102,8 +103,20 @@ class Wordpress {
           `Failed to fetch ${postType} posts: ${response.statusText}`
         );
       }
+
+      // Extract headers to get total count and pages information
+      const totalCount = response.headers.get("X-WP-Total");
+      const totalPages = response.headers.get("X-WP-TotalPages");
+
       const data = await response.json();
-      return data;
+
+      console.log(response);
+
+      return {
+        posts: data,
+        totalNumberOfPosts: totalCount,
+        totalPages: totalPages,
+      };
     } catch (error) {
       throw new Error(`Failed to fetch ${postType} posts: ${error.message}`);
     }
