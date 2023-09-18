@@ -56,7 +56,7 @@ class Wordpress {
   async getPostById(postId) {
     try {
       const response = await fetch(
-        `${this.baseURL}/wp-json/wp/v2/posts/${postId}`
+        `${this.baseURL}/wp-json/wp/v2/posts/${postId}?_embed`
       );
       if (!response.ok) {
         throw new Error(
@@ -75,7 +75,7 @@ class Wordpress {
   async getPostBySlug(slug) {
     try {
       const response = await fetch(
-        `${this.baseURL}/wp-json/wp/v2/posts?slug=${slug}`
+        `${this.baseURL}/wp-json/wp/v2/posts?slug=${slug}&_embed`
       );
       if (!response.ok) {
         throw new Error(
@@ -102,7 +102,7 @@ class Wordpress {
       // Customize the query parameters and criteria based on your requirements
       const queryParams = new URLSearchParams({
         per_page: 5, // Number of similar posts to fetch
-        // Add other query parameters or criteria as needed
+        _embed: true,
       });
 
       const response = await fetch(

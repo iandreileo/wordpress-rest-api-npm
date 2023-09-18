@@ -1,6 +1,6 @@
 {
   "name": "wordpress-rest-api-npm",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "This is a npm package for the Wordpress REST API.",
   "main": "src/index.js",
   "scripts": {
