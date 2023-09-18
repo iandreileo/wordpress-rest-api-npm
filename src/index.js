@@ -4,7 +4,7 @@ class Wordpress {
   }
 
   async getPosts(page = 1, perPage = 10) {
-    return this.getPostsByType("post", page, perPage);
+    return this.getPostsByType("posts", page, perPage);
   }
 
   async getCustomPosts(customPostType, page = 1, perPage = 10) {
@@ -12,7 +12,7 @@ class Wordpress {
   }
 
   async getStickyPosts(page = 1, perPage = 10) {
-    return this.getPostsByType("post", page, perPage, true);
+    return this.getPostsByType("posts", page, perPage, true);
   }
 
   // Doc: Needs custom function on the server for "category_slug"
