@@ -15,6 +15,44 @@ class Wordpress {
     return this.getPostsByType("post", page, perPage, true);
   }
 
+  // Doc: Needs custom function on the server for "category_slug"
+  // https://stackoverflow.com/questions/28540075/how-can-i-get-a-list-of-posts-for-a-category-with-wp-api
+  async getPostsByCategory(category_slug, page = 1, perPage = 10) {
+    try {
+      const queryParams = new URLSearchParams({
+        page: page.toString(),
+        per_page: perPage.toString(),
+        category_slug: category_slug,
+        _embed: true,
+      });
+
+      const response = await fetch(
+        `${this.baseURL}/wp-json/wp/v2/posts?${queryParams}`
+      );
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch posts for category ${category_slug}: ${response.statusText}`
+        );
+      }
+
+      // Extract headers to get total count and pages information
+      const totalCount = response.headers.get("X-WP-Total");
+      const totalPages = response.headers.get("X-WP-TotalPages");
+
+      const data = await response.json();
+
+      return {
+        posts: data,
+        totalNumberOfPosts: totalCount,
+        totalPages: totalPages,
+      };
+    } catch (error) {
+      throw new Error(
+        `Failed to fetch posts for category ${category_slug}: ${error.message}`
+      );
+    }
+  }
+
   async getPostById(postId) {
     try {
       const response = await fetch(
