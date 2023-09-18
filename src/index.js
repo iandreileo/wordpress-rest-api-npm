@@ -53,7 +53,7 @@ class Wordpress {
     }
   }
 
-  async getSimilarPostsBySlug(slug, similarityCriteria) {
+  async getSimilarPostsBySlug(slug) {
     try {
       const targetPost = await this.getPostBySlug(slug);
 
@@ -109,7 +109,18 @@ class Wordpress {
     }
   }
 
-  // You can add more methods for other API endpoints as needed.
+  async getCategories() {
+    try {
+      const response = await fetch(`${this.baseURL}/wp-json/wp/v2/categories`);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch categories: ${response.statusText}`);
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      throw new Error(`Failed to fetch categories: ${error.message}`);
+    }
+  }
 }
 
 module.exports = Wordpress;
